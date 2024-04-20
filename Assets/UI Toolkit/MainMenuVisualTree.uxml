@@ -6,5 +6,7 @@
         <ui:Button text="Glossary" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Glossary" class="button" style="margin-bottom: 2px;" />
         <ui:Button text="Leaderboard" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Leaderbord" class="button" />
         <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitGameButton" class="button" />
+        <ui:Toggle label=" " name="SoundSetting" style="background-image: url(&quot;project://database/Assets/FreeButtonSet/Textures/icons/256x256/speaker.png?fileID=21300000&amp;guid=139c4181e893555468a02df6e9fa5a76&amp;type=3#speaker&quot;); height: 41px; width: 49px; position: absolute; top: 10px; left: 10px;" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" style="height: 46px; width: 51px; background-image: url(&quot;project://database/Assets/FreeButtonSet/Textures/icons/256x256/speaker.png?fileID=21300000&amp;guid=139c4181e893555468a02df6e9fa5a76&amp;type=3#speaker&quot;); background-color: rgb(172, 155, 155);" />
     </ui:VisualElement>
 </ui:UXML>
