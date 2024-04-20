@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 /[Aa]ssets/[Ff]irebase/*
 /[Aa]ssets/[Ss]treamingAssets/*
+/[Aa]ssets/[Ee]ditor Default Resources/*
+/[Aa]ssets/[Ee]xternalDependencyManager/*
