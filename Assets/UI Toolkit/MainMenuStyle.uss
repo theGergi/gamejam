@@ -29,4 +29,14 @@
     -unity-text-outline-color: rgba(255, 253, 253, 0);
     color: rgb(253, 253, 253);
     -unity-font-style: bold;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    transition-duration: 0.35s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    -unity-background-image-tint-color: rgb(244, 144, 93);
 }
