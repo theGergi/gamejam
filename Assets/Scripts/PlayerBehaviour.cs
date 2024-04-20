@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private const float EPSILON = 0.0005f;
+    private const float floorSpeed = -0.5f;
+
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
-    private float coyoteTime = 0.15f;
-    private float coyoteTimeCounter;
-
-    private float jumpBufferTime = 0.15f;
-    private float jumpBufferCounter;
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -31,7 +23,7 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
 
 
-        if (rb.velocity.y == 0f)
+        if (rb.velocity.y <= floorSpeed + EPSILON && rb.velocity.y >= floorSpeed - EPSILON && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
