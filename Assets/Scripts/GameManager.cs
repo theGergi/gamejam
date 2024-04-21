@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Progress;
 using System;
 using System.Linq;
+using UnityEngine.SocialPlatforms;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,15 +45,7 @@ public class GameManager : MonoBehaviour
 
         playerRef = collection.Document(userID);
 
-        Dictionary<string, object> user = new Dictionary<string, object>
-        {
-            { "score", 122 },
-            { "name", "poopoo" },
-        };
-        playerRef.SetAsync(user).ContinueWithOnMainThread(task =>
-        {
-            Debug.Log("Added data");
-        });
+        
 
         //getScores();
         getOwnScore();
@@ -70,9 +63,10 @@ public class GameManager : MonoBehaviour
                 Dictionary<string, object> keyValuePairs = item.ToDictionary();
                 items.Add(keyValuePairs);
             }
+            //leaderboard.Clear();
             Func<VisualElement> makeItem = () => new VisualElement();
             Action<VisualElement, int> bindItem = (e, i) => {
-                Label l = new Label(i + ". " + items[i]["name"].ToString());
+                Label l = new Label(i + 1 + ". " + items[i]["name"].ToString());
                 Label l2 = new Label(items[i]["score"].ToString());
                 l.style.unityTextAlign = TextAnchor.MiddleLeft;
                 l2.style.unityTextAlign = TextAnchor.MiddleRight;
@@ -85,6 +79,7 @@ public class GameManager : MonoBehaviour
             leaderboard.bindItem = bindItem;
             leaderboard.makeItem = makeItem;
             leaderboard.itemsSource = items;
+            leaderboard.Rebuild();
         });
 
         
@@ -97,6 +92,19 @@ public class GameManager : MonoBehaviour
             DocumentSnapshot snapshot = task.Result;
             Dictionary<string, object> keyValuePairs = snapshot.ToDictionary();
             Debug.Log(string.Format("This player has name {0} and score {1}", keyValuePairs["name"], keyValuePairs["score"]));
+        });
+    }
+
+    public void pushScore(int score)
+    {
+        Dictionary<string, object> user = new Dictionary<string, object>
+        {
+            { "score", score },
+            { "name", "poopoo" },
+        };
+        playerRef.SetAsync(user).ContinueWithOnMainThread(task =>
+        {
+            Debug.Log("Added data");
         });
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class MainMenuEvents : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MainMenuEvents : MonoBehaviour
     private Button _exit_button;
     private Button _volume_button;
     private Button _leaderboard_button;
+    private Button _exit_leaderboard_button;
 
     private VisualElement _leaderboard_menu;
     private VisualElement _main_menu;
@@ -24,7 +26,7 @@ public class MainMenuEvents : MonoBehaviour
         _document = GetComponent<UIDocument>();
            
         _start_button = _document.rootVisualElement.Q("StartGameButton") as Button;
-        _exit_button = _document.rootVisualElement.Q("ExitGameButton") as Button;
+        _exit_button = _document.rootVisualElement.Q("ExitButton") as Button;
         _leaderboard_button = _document.rootVisualElement.Q("LeaderboardButton") as Button;
 
 
@@ -41,6 +43,9 @@ public class MainMenuEvents : MonoBehaviour
         _leaderboard_menu = _document.rootVisualElement.Q("Leaderboard") as VisualElement;
         _leaderboard = _document.rootVisualElement.Q("Scores") as ListView;
 
+        _exit_leaderboard_button = _document.rootVisualElement.Q("ExitLeaderboardButton") as Button;
+        _exit_leaderboard_button.RegisterCallback<ClickEvent>(OnExitLeaderboardClick);
+
 
         _main_menu.style.display = DisplayStyle.Flex;
         _leaderboard_menu.style.display = DisplayStyle.None;
@@ -55,18 +60,25 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnPlayGameClick(ClickEvent evt)
     {
-        Debug.Log("You pressed the Button");
+        SceneManager.LoadScene(1);
     }
 
     private void OnExitGameClick(ClickEvent evt)
     {
-        Debug.Log("You pressed the Exit Button");
+        Application.Quit();
+    }
+
+    private void OnExitLeaderboardClick(ClickEvent evt)
+    {
+        _main_menu.style.display = DisplayStyle.Flex;
+        _leaderboard_menu.style.display = DisplayStyle.None;
     }
 
     private void OnLeaderboardClick(ClickEvent evt)
     {
         Debug.Log("You pressed the Leaderboard Button");
 
+        
 
         _main_menu.style.display = DisplayStyle.None;
         _leaderboard_menu.style.display = DisplayStyle.Flex;

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/RIMOLIMO2.unity
+    guid: eb0a9ae81b309814c8de9c2b31f2aba5
+  - enabled: 1
+    path: Assets/Scenes/monderpet.unity
+    guid: edb9677dea0679f48955b7f6a205785c
   m_configObjects: {}
