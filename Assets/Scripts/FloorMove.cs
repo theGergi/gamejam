@@ -8,9 +8,20 @@ public class FloorMove : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
+    private float count = 1;
+
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Time.unscaledTime);
+
+        if (Time.unscaledTime / 10 > count)
+        {
+            count += 1;
+            /*speed = (-1f)*(count + 1f);*/
+            Time.timeScale = Mathf.Min(2f, Mathf.Max(1f, Time.unscaledTime/20)); 
+        }
+
         rb.velocity = new Vector2(0, speed);
 
         if (transform.position.y < -8)

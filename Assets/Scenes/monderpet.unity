@@ -152,8 +152,8 @@ Transform:
   m_GameObject: {fileID: 72689204}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9794, y: -1.95, z: 10}
-  m_LocalScale: {x: 15.122445, y: 17.8324, z: 1}
+  m_LocalPosition: {x: -3.9853, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 322712380}
@@ -227,7 +227,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -281376394117343067, guid: b5f5cfbaa64c7d44b9cb0d75674b7bb7, type: 3}
+  m_Sprite: {fileID: -6992654200950602611, guid: b32176674c8a7f048bddca8115446da8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -255,8 +255,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!60 &72689210
-PolygonCollider2D:
+--- !u!61 &72689210
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -287,23 +287,19 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00000023841858, y: 0.0654068}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.09, y: 0.16}
+    oldSize: {x: 0.9, y: 1.6}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.20132756, y: 0.07242653}
-      - {x: -0.2429936, y: 0.07329129}
-      - {x: -0.27609977, y: 0.01880753}
-      - {x: 0.39166108, y: 0.011457503}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32171106, y: 0.1308136}
+  m_EdgeRadius: 0
 --- !u!1 &223606357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,10 +1245,6 @@ PrefabInstance:
     - target: {fileID: 2357183790040489552, guid: b5befb1731521c246adb7746f8520b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968859754444092480, guid: b5befb1731521c246adb7746f8520b42, type: 3}
-      propertyPath: speed
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7837408022853860153, guid: b5befb1731521c246adb7746f8520b42, type: 3}
       propertyPath: m_Name
