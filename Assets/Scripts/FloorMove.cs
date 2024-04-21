@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FloorMove : MonoBehaviour
 {
-    private float speed = -0.5f;
+    public float speed = -0.5f;
 
     [SerializeField] private Rigidbody2D rb;
 
@@ -12,5 +12,8 @@ public class FloorMove : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(0, speed);
+
+        if (transform.position.y < -8)
+            Destroy(gameObject);
     }
 }
