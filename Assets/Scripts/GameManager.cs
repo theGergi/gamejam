@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Extensions;
 using Firebase.Firestore;
+using UnityEngine.UIElements;
 using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Progress;
+using System;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +15,18 @@ public class GameManager : MonoBehaviour
     FirebaseFirestore db;
     CollectionReference collection;
     DocumentReference playerRef;
+
+    void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
+
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,20 +54,40 @@ public class GameManager : MonoBehaviour
             Debug.Log("Added data");
         });
 
-        getScores();
+        //getScores();
         getOwnScore();
     }
 
-    void getScores()
+    public void updateLeaderboard(ListView leaderboard)
     {
+        var items = new List<Dictionary<string,object>>();
         Query query = collection.OrderByDescending("score").Limit(10);
         query.GetSnapshotAsync().ContinueWithOnMainThread((task) =>
-        {   
-            foreach (DocumentSnapshot item in task.Result.Documents) {
+        {
+            //items = task.Result.Documents.ToList<Dictionary<string, object>>();
+            foreach (DocumentSnapshot item in task.Result.Documents)
+            {
                 Dictionary<string, object> keyValuePairs = item.ToDictionary();
-                Debug.Log(string.Format("Player {0} has score {1}", keyValuePairs["name"], keyValuePairs["score"]));
+                items.Add(keyValuePairs);
             }
+            Func<VisualElement> makeItem = () => new VisualElement();
+            Action<VisualElement, int> bindItem = (e, i) => {
+                Label l = new Label(i + ". " + items[i]["name"].ToString());
+                Label l2 = new Label(items[i]["score"].ToString());
+                l.style.unityTextAlign = TextAnchor.MiddleLeft;
+                l2.style.unityTextAlign = TextAnchor.MiddleRight;
+                e.Add(l);
+                e.Add(l2);
+                e.style.flexDirection = FlexDirection.Row;
+                e.style.justifyContent = Justify.SpaceBetween;
+
+            };
+            leaderboard.bindItem = bindItem;
+            leaderboard.makeItem = makeItem;
+            leaderboard.itemsSource = items;
         });
+
+        
     }
 
     void getOwnScore()
