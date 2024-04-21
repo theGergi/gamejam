@@ -17,7 +17,7 @@ public class ScoreTracking : MonoBehaviour
         {
             string finalScore = ScoreText.text;
             Debug.Log("You are dead! Your score is: "+finalScore);
-            Destroy(gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().gameEnd(int.Parse(finalScore));
         }
 
     }

@@ -9,6 +9,7 @@ using static UnityEditor.Progress;
 using System;
 using System.Linq;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,9 +17,13 @@ public class GameManager : MonoBehaviour
     FirebaseFirestore db;
     CollectionReference collection;
     DocumentReference playerRef;
+    public string playerName = "";
+    public bool isGameEnd = false;
+
 
     void Awake()
     {
+        isGameEnd = false;
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
 
         if (objs.Length > 1)
@@ -44,11 +49,6 @@ public class GameManager : MonoBehaviour
         collection = db.Collection("user_scores");
 
         playerRef = collection.Document(userID);
-
-        
-
-        //getScores();
-        getOwnScore();
     }
 
     public void updateLeaderboard(ListView leaderboard)
@@ -81,31 +81,43 @@ public class GameManager : MonoBehaviour
             leaderboard.itemsSource = items;
             leaderboard.Rebuild();
         });
-
-        
     }
 
-    void getOwnScore()
+    public void getOwnScore(Label score)
     {
-        playerRef.GetSnapshotAsync().ContinueWithOnMainThread((task) =>
+        int counter = 1;
+        Query query = collection.OrderByDescending("score");
+        query.GetSnapshotAsync().ContinueWithOnMainThread((task) =>
         {
-            DocumentSnapshot snapshot = task.Result;
-            Dictionary<string, object> keyValuePairs = snapshot.ToDictionary();
-            Debug.Log(string.Format("This player has name {0} and score {1}", keyValuePairs["name"], keyValuePairs["score"]));
+            //items = task.Result.Documents.ToList<Dictionary<string, object>>();
+            foreach (DocumentSnapshot item in task.Result.Documents)
+            {
+                Debug.Log(item.Id);
+                if (item.Id == userID)
+                {
+                    Dictionary<string, object> keyValuePairs = item.ToDictionary();
+                    score.text = string.Format("{0}. {1}\nScore: {2}", counter, keyValuePairs["name"], keyValuePairs["score"]);
+                    break;
+                }
+                counter++;
+            }
         });
     }
 
-    public void pushScore(int score)
+    public void gameEnd(int score)
     {
+        Debug.Log(playerName);
         Dictionary<string, object> user = new Dictionary<string, object>
         {
             { "score", score },
-            { "name", "poopoo" },
+            { "name", playerName },
         };
         playerRef.SetAsync(user).ContinueWithOnMainThread(task =>
         {
             Debug.Log("Added data");
         });
+        isGameEnd = true;
+        SceneManager.LoadScene(0);
     }
 
     // Update is called once per frame
