@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
                 if (item.Id == userID)
                 {
                     Dictionary<string, object> keyValuePairs = item.ToDictionary();
-                    score.text = string.Format("{0}. {1}\nScore: {2}", counter, keyValuePairs["name"], keyValuePairs["score"]);
+                    score.text = string.Format("{0}. {1}\nScore: {2}", counter, playerName, keyValuePairs["score"]);
                     break;
                 }
                 counter++;

@@ -79,7 +79,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         _start_button.UnregisterCallback<ClickEvent>(OnPlayGameClick);
         _exit_button.UnregisterCallback<ClickEvent>(OnExitGameClick);
-        _volume_button.UnregisterCallback<ClickEvent>(OnVolumeClick);
+        //_volume_button.UnregisterCallback<ClickEvent>(OnVolumeClick);
     }
 
     private void OnPlayGameClick(ClickEvent evt)
@@ -124,15 +124,18 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnVolumeClick(ClickEvent evt)
     {
+        Debug.Log("hey");
         if (flag)
         {
             Debug.Log("You muted the game");
             flag = false;
+            GameObject.Find("GameManager").GetComponent<AudioSource>().mute = true;
         }
         else
         {
             Debug.Log("You unmuted the game");
             flag = true;
+            GameObject.Find("GameManager").GetComponent<AudioSource>().mute = false;
         }
     }
 }
