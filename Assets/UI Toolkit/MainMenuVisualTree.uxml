@@ -4,10 +4,8 @@
         <ui:VisualElement name="MainMenu" style="flex-grow: 1; display: none;">
             <ui:Label tabindex="-1" text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" />
             <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" class="button" style="-unity-background-scale-mode: stretch-to-fill; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;" />
-            <ui:Button text="Glossary" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Glossary" class="button" style="margin-bottom: 2px;" />
             <ui:Button text="Leaderboard" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardButton" class="button" style="visibility: visible;" />
             <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitButton" class="button" />
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="SoundSetting" style="height: 46px; width: 51px; background-image: url(&quot;project://database/Assets/FreeButtonSet/Textures/icons/128x128/speaker.png?fileID=21300000&amp;guid=a8bf463d0bcbdd440b693618eccf4027&amp;type=3#speaker&quot;); background-color: rgba(63, 63, 63, 0); -unity-background-image-tint-color: rgb(255, 255, 255); position: absolute; top: 10px; left: 10px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Leaderboard" style="flex-grow: 1; display: none; overflow: visible; align-self: auto; visibility: visible; background-image: none; -unity-background-scale-mode: scale-and-crop; width: auto; align-items: stretch; flex-direction: row;">
             <ui:Label tabindex="-1" text="1. testuser\nScore: 123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Score" style="background-image: url(&quot;project://database/Assets/FreeButtonSet/Textures/controls/radio_200.png?fileID=2800000&amp;guid=6a4c582ed02cf4e40954a044796d37ac&amp;type=3#radio_200&quot;); color: rgb(255, 255, 255); font-size: 20px; padding-top: 15px; width: 25%; height: 20%; left: 2%; top: 30%; display: flex; padding-left: 10px;" />
@@ -23,4 +21,5 @@
             <ui:Button text="Ready" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ReadyButton" class="button" style="margin-top: 40px;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="SoundSetting" usage-hints="None" tabindex="-1" style="height: 46px; width: 51px; background-image: url(&quot;project://database/Assets/FreeButtonSet/Textures/icons/128x128/speaker.png?fileID=21300000&amp;guid=a8bf463d0bcbdd440b693618eccf4027&amp;type=3#speaker&quot;); background-color: rgba(63, 63, 63, 0); -unity-background-image-tint-color: rgb(255, 255, 255); position: absolute; top: 10px; left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; transition-duration: 0.35s;" />
 </ui:UXML>
