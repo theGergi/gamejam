@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float jumpingPower;
     private bool isFacingLeft = true;
 
+    private float startTime;
+    private float count = 1;
+
     private float deviationMargin = 3;
     private float randomDeviation = 0f;
     private float timeOfDeviation = -1f;
@@ -22,13 +25,22 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        startTime = Time.unscaledTime;
         speed = rb.gravityScale * 2f;
         jumpingPower = rb.gravityScale * 4f;
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.unscaledTime - startTime / 10 > count)
+        {
+            count += 1;
+
+            Time.timeScale = Mathf.Min(2f, Mathf.Max(1f, (Time.unscaledTime - startTime) / 20));
+        }
+
         horizontal = Input.GetAxisRaw("Horizontal");
         if (rb.velocity.y <= floorSpeed + EPSILON && rb.velocity.y >= floorSpeed - EPSILON && IsGrounded())
         {

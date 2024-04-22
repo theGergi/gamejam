@@ -8,10 +8,17 @@ public class ScoreTracking : MonoBehaviour
 {
     [SerializeField] private Text ScoreText;
 
+    private float startTime;
+
+    void Start()
+    {
+        startTime = Time.time;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        ScoreText.text = (Time.time * 100f).ToString("F0");
+        ScoreText.text = ((Time.time - startTime) * 100f).ToString("F0");
 
         if (GameOver())
         {
