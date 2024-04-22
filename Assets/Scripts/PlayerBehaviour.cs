@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     private float jumpingPower;
     private bool isFacingLeft = true;
 
+    private float deviationMargin = 3;
+    private float randomDeviation = 0f;
+    private float timeOfDeviation = -1f;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -28,13 +32,9 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         if (rb.velocity.y <= floorSpeed + EPSILON && rb.velocity.y >= floorSpeed - EPSILON && IsGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            randomDeviation = Random.Range(-deviationMargin, deviationMargin);
+            rb.velocity = new Vector2(rb.velocity.x + randomDeviation, jumpingPower);
+            timeOfDeviation = Time.time;
         }
 
         Flip();
@@ -48,7 +48,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (timeOfDeviation < Time.time - 0.5f)
+        {
+            randomDeviation = 0;
+        }
+        rb.velocity = new Vector2(horizontal * speed + randomDeviation, rb.velocity.y);
     }
 
     private bool IsGrounded()
