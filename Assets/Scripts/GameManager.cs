@@ -4,11 +4,7 @@ using UnityEngine;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine.UIElements;
-using UnityEngine.SocialPlatforms.Impl;
-using static UnityEditor.Progress;
 using System;
-using System.Linq;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
